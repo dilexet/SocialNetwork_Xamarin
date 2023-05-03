@@ -121,7 +121,6 @@
                          HorizontalOptions="CenterAndExpand"
                          WidthRequest="300" Margin="0,0,0,30">
                 <material3:MaterialButton
-                    x:Name="RedirectToSignUp_Button"
                     Clicked="RedirectToSignUp_Button_OnClicked"
                     StyleClass="RedirectToSignUpButtonStyle" />
             </StackLayout>
