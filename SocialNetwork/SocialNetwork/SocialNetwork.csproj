@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\password.svg" />
+    <None Remove="Resources\visibility_white_24dp.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\visibility_black_18dp.svg" />
+    <None Remove="Resources\visibility_off_black_18dp.svg" />
+    <None Remove="Resources\visibility_black_24dp.svg" />
+    <None Remove="Resources\visibility_off_black_24dp.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Plugin.MaterialDesignControls" Version="1.12.0" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+    <PackageReference Include="Xamarin.Forms.Svg" Version="1.0.3" />
+    <PackageReference Include="Xamarin.Forms.Visual.Material" Version="5.0.0.2578" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\visibility_18dp.svg" />
+    <EmbeddedResource Include="Resources\visibility_off_18dp.svg" />
+    <None Remove="Resources\highlight_off_18dp.svg" />
+    <EmbeddedResource Include="Resources\highlight_off_18dp.svg" />
+    <None Remove="Resources\account_circle_black_48dp.svg" />
+    <EmbeddedResource Include="Resources\account_circle_48dp.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\RegisterPage.xaml.cs">
+      <DependentUpon>RegisterPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
