@@ -14,15 +14,15 @@ namespace SocialNetwork.Droid
         {
             base.OnCreate(savedInstanceState);
 
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            Xamarin.Forms.Forms.Init(this, savedInstanceState);
-
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             Xamarin.Forms.Svg.Droid.SvgImage.Init(this);
 
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
             Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
             Plugin.MaterialDesignControls.Android.Renderer.Init();
-            
+
             LoadApplication(new App());
         }
 

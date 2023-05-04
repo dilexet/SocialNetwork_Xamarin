@@ -1,14 +1,13 @@
 ﻿using System;
-using Xamarin.Forms;
 
-namespace SocialNetwork.Views
+namespace SocialNetwork.Views.Authorize
 {
     public partial class RegisterPage
     {
         public RegisterPage()
         {
             InitializeComponent();
-            NavigationPage.SetHasBackButton(this, false);
+            Xamarin.Forms.NavigationPage.SetHasBackButton(this, false);
         }
 
         private void UsernameText_OnTextChanged(object sender, EventArgs e)

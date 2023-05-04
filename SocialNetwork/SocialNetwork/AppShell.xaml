@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:tabBar="clr-namespace:SocialNetwork.Views.TabBar;assembly=SocialNetwork"
+       x:Class="SocialNetwork.AppShell">
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style x:Key="TabBarStyle" TargetType="TabBar">
+                <Setter Property="Shell.TabBarBackgroundColor" Value="#30A9DE" />
+                <Setter Property="Shell.TabBarTitleColor" Value="#DCDCDC" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#1E1E1E" />
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+
+    <TabBar Style="{StaticResource TabBarStyle}">
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent ContentTemplate="{DataTemplate tabBar:NewsPage}" />
+        </Tab>
+        <Tab Title="Friends" Icon="friends.png">
+            <ShellContent ContentTemplate="{DataTemplate tabBar:FriendsPage}" />
+        </Tab>
+        <Tab Title="Messenger" Icon="chat_bubble.png">
+            <ShellContent ContentTemplate="{DataTemplate tabBar:MessengerPage}" />
+        </Tab>
+        <Tab Title="Profile" Icon="user.png">
+            <ShellContent ContentTemplate="{DataTemplate tabBar:ProfilePage}" />
+        </Tab>
+    </TabBar>
+</Shell>

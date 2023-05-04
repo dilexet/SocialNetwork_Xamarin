@@ -1,14 +1,14 @@
 ﻿using System;
-using Xamarin.Forms;
+using SocialNetwork.Views.TabBar;
 
-namespace SocialNetwork.Views
+namespace SocialNetwork.Views.Authorize
 {
     public partial class LoginPage
     {
         public LoginPage()
         {
             InitializeComponent();
-            NavigationPage.SetHasBackButton(this, false);
+            Xamarin.Forms.NavigationPage.SetHasBackButton(this, false);
         }
 
         private void LoginText_OnTextChanged(object sender, EventArgs e)
@@ -50,6 +50,11 @@ namespace SocialNetwork.Views
         private async void RedirectToSignUp_Button_OnClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new RegisterPage(), false);
+        }
+
+        private async void ButtonSubmit_OnClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new NewsPage(), false);
         }
     }
 }

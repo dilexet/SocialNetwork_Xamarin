@@ -1,4 +1,5 @@
 ﻿using SocialNetwork.Views;
+using SocialNetwork.Views.Authorize;
 using Xamarin.Forms;
 
 namespace SocialNetwork
@@ -8,12 +9,23 @@ namespace SocialNetwork
         public App()
         {
             InitializeComponent();
+        }
 
-            MainPage = new NavigationPage(new LoginPage());
+        private bool IsAuth()
+        {
+            return true;
         }
 
         protected override void OnStart()
         {
+            if (IsAuth())
+            {
+                MainPage = new AppShell();
+            }
+            else
+            {
+                MainPage = new NavigationPage(new LoginPage());
+            }
         }
 
         protected override void OnSleep()

@@ -5,7 +5,7 @@
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:material="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls"
              xmlns:material3="clr-namespace:Plugin.MaterialDesignControls.Material3;assembly=Plugin.MaterialDesignControls"
-             x:Class="SocialNetwork.Views.RegisterPage"
+             x:Class="SocialNetwork.Views.Authorize.LoginPage"
              Visual="Material">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -32,49 +32,33 @@
             <Setter Property="BorderColor" Value="{StaticResource BorderColor}" />
             <Setter Property="AssistiveTextColor" Value="{StaticResource ErrorColor}" />
         </Style>
-        <Style TargetType="material:MaterialEntry" Class="UsernameEntryStyle">
-            <Setter Property="LabelText" Value="Username *" />
-            <Setter Property="Placeholder" Value="Enter your username" />
+        <Style TargetType="material:MaterialEntry" Class="LoginEntryStyle">
+            <Setter Property="LabelText" Value="Login *" />
+            <Setter Property="Placeholder" Value="Enter your login" />
             <Setter Property="TabIndex" Value="1" />
-            <Setter Property="Keyboard" Value="Text" />
             <Setter Property="ClearIconIsVisible" Value="True" />
-        </Style>
-        <Style TargetType="material:MaterialEntry" Class="EmailEntryStyle">
-            <Setter Property="LabelText" Value="Email *" />
-            <Setter Property="Placeholder" Value="Enter your email" />
-            <Setter Property="TabIndex" Value="2" />
-            <Setter Property="Keyboard" Value="Email" />
-            <Setter Property="ClearIconIsVisible" Value="True" />
-        </Style>
-        <Style TargetType="material:MaterialEntry" Class="SharedPasswordEntryStyle">
-            <Setter Property="Keyboard" Value="Text" />
-            <Setter Property="IsPassword" Value="True" />
-            <Setter Property="ClearIconIsVisible" Value="False" />
         </Style>
         <Style TargetType="material:MaterialEntry" Class="PasswordEntryStyle">
             <Setter Property="LabelText" Value="Password *" />
             <Setter Property="Placeholder" Value="Enter your password" />
-            <Setter Property="TabIndex" Value="3" />
-        </Style>
-        <Style TargetType="material:MaterialEntry" Class="ConfirmPasswordEntryStyle">
-            <Setter Property="LabelText" Value="Confirm password *" />
-            <Setter Property="Placeholder" Value="Confirm your password" />
-            <Setter Property="TabIndex" Value="4" />
+            <Setter Property="TabIndex" Value="2" />
+            <Setter Property="IsPassword" Value="True" />
+            <Setter Property="ClearIconIsVisible" Value="False" />
         </Style>
         <Style TargetType="StackLayout" Class="StackLayoutEntryStyle">
             <Setter Property="Padding" Value="0,10,0,10" />
             <Setter Property="Margin" Value="0,10,0,0" />
         </Style>
         <Style TargetType="material3:MaterialButton" Class="SubmitButtonStyle">
-            <Setter Property="Text" Value="Sign up" />
+            <Setter Property="Text" Value="Sign in" />
             <Setter Property="TextColor" Value="#F5F5F5" />
             <Setter Property="BackgroundColor" Value="#3C3C3C" />
             <Setter Property="Animation" Value="Fade" />
             <Setter Property="CornerRadius" Value="15" />
             <Setter Property="IsEnabled" Value="False" />
         </Style>
-        <Style TargetType="material3:MaterialButton" Class="RedirectToSignInButtonStyle">
-            <Setter Property="Text" Value="Sign in" />
+        <Style TargetType="material3:MaterialButton" Class="RedirectToSignUpButtonStyle">
+            <Setter Property="Text" Value="Sign up" />
             <Setter Property="TextColor" Value="#FAFAFA" />
             <Setter Property="BackgroundColor" Value="#4AB34C" />
             <Setter Property="Animation" Value="Fade" />
@@ -91,7 +75,7 @@
                         <ffimageloadingsvg:SvgCachedImage WidthRequest="100" HeightRequest="100"
                                                           HorizontalOptions="Center"
                                                           Source="resource://SocialNetwork.Resources.account_circle_48dp.svg" />
-                        <Label Text="Sign up to SocialNetwork"
+                        <Label Text="Sign in to SocialNetwork"
                                FontSize="Medium"
                                TextColor="#3D3D3D"
                                HorizontalTextAlignment="Center" />
@@ -99,21 +83,9 @@
 
                     <StackLayout StyleClass="StackLayoutEntryStyle">
                         <material:MaterialEntry
-                            x:Name="UsernameText"
-                            TextChanged="UsernameText_OnTextChanged"
-                            StyleClass="MaterialEntryStyle, UsernameEntryStyle">
-                            <material:MaterialEntry.CustomClearIcon>
-                                <ffimageloadingsvg:SvgCachedImage
-                                    Source="resource://SocialNetwork.Resources.highlight_off_18dp.svg" />
-                            </material:MaterialEntry.CustomClearIcon>
-                        </material:MaterialEntry>
-                    </StackLayout>
-
-                    <StackLayout StyleClass="StackLayoutEntryStyle">
-                        <material:MaterialEntry
-                            x:Name="EmailText"
-                            TextChanged="EmailText_OnTextChanged"
-                            StyleClass="MaterialEntryStyle, EmailEntryStyle">
+                            x:Name="LoginText"
+                            TextChanged="LoginText_OnTextChanged"
+                            StyleClass="MaterialEntryStyle, LoginEntryStyle">
                             <material:MaterialEntry.CustomClearIcon>
                                 <ffimageloadingsvg:SvgCachedImage
                                     Source="resource://SocialNetwork.Resources.highlight_off_18dp.svg" />
@@ -125,23 +97,7 @@
                         <material:MaterialEntry
                             x:Name="PasswordText"
                             TextChanged="PasswordText_OnTextChanged"
-                            StyleClass="MaterialEntryStyle, SharedPasswordEntryStyle, PasswordEntryStyle">
-                            <material:MaterialEntry.CustomShowPasswordIcon>
-                                <ffimageloadingsvg:SvgCachedImage
-                                    Source="resource://SocialNetwork.Resources.visibility_18dp.svg" />
-                            </material:MaterialEntry.CustomShowPasswordIcon>
-                            <material:MaterialEntry.CustomHidePasswordIcon>
-                                <ffimageloadingsvg:SvgCachedImage
-                                    Source="resource://SocialNetwork.Resources.visibility_off_18dp.svg" />
-                            </material:MaterialEntry.CustomHidePasswordIcon>
-                        </material:MaterialEntry>
-                    </StackLayout>
-
-                    <StackLayout StyleClass="StackLayoutEntryStyle">
-                        <material:MaterialEntry
-                            x:Name="ConfirmPasswordText"
-                            TextChanged="ConfirmPasswordText_OnTextChanged"
-                            StyleClass="MaterialEntryStyle, SharedPasswordEntryStyle, ConfirmPasswordEntryStyle">
+                            StyleClass="MaterialEntryStyle, PasswordEntryStyle">
                             <material:MaterialEntry.CustomShowPasswordIcon>
                                 <ffimageloadingsvg:SvgCachedImage
                                     Source="resource://SocialNetwork.Resources.visibility_18dp.svg" />
@@ -155,7 +111,8 @@
 
                     <StackLayout Margin="0,20,0,0">
                         <material3:MaterialButton
-                            x:Name="Submit_Button"
+                            x:Name="ButtonSubmit"
+                            Clicked="ButtonSubmit_OnClicked"
                             StyleClass="SubmitButtonStyle" />
                     </StackLayout>
 
@@ -165,8 +122,8 @@
                          HorizontalOptions="CenterAndExpand"
                          WidthRequest="300" Margin="0,0,0,30">
                 <material3:MaterialButton
-                    Clicked="RedirectToSignIn_Button_OnClicked"
-                    StyleClass="RedirectToSignInButtonStyle" />
+                    Clicked="RedirectToSignUp_Button_OnClicked"
+                    StyleClass="RedirectToSignUpButtonStyle" />
             </StackLayout>
         </StackLayout>
     </ScrollView>

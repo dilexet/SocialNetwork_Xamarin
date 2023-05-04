@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SocialNetwork.Views.TabBar.NewsPage"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:models="clr-namespace:SocialNetwork.ModelsView;assembly=SocialNetwork"
+             Visual="Material">
+    <ContentPage.Content>
+        <ScrollView>
+            <CollectionView x:Name="NewsView"
+                            ItemsSource="{Binding NewsItems}"
+                            SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="0,40,0,40" Margin="0,30,0,30" x:DataType="models:NewsDto">
+                          <ffimageloading:CachedImage
+                                HorizontalOptions="Center"
+                                VerticalOptions="CenterAndExpand"
+                                Margin="30"
+                                LoadingPlaceholder="temp.png"
+                                ErrorPlaceholder="temp.png"
+                                DownsampleToViewSize="True"
+                                Aspect="AspectFit"
+                                HeightRequest="60"
+                                WidthRequest="60"
+                                Source="{Binding ProfileImageUri}">
+                                <ffimageloading:CachedImage.Transformations>
+                                    <fftransformations:CircleTransformation />
+                                </ffimageloading:CachedImage.Transformations>
+                            </ffimageloading:CachedImage>
+                            <Label Text="{Binding Username}"
+                                   LineBreakMode="NoWrap"
+                                   FontSize="16" />
+                            <Label Text="{Binding DateCreated}"
+                                   LineBreakMode="NoWrap"
+                                   FontSize="16" />
+                            <Label Text="{Binding Text}"
+                                   LineBreakMode="NoWrap"
+                                   FontSize="13" />
+                            <Image HeightRequest="100" WidthRequest="100"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="FillAndExpand"
+                                   Aspect="AspectFit">
+                                <Image.Source>
+                                    <UriImageSource Uri="{Binding ImageUri}" CacheValidity="1" CachingEnabled="True" />
+                                </Image.Source>
+                            </Image>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
