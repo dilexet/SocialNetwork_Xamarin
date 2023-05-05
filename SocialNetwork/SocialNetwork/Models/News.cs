@@ -10,5 +10,6 @@ namespace SocialNetwork.Models
         public DateTime DateCreated { get; set; }
         public string Text { get; set; }
         public Uri ImageUri { get; set; }
+        public int[] IdUsersLiked { get; set; }
     }
 }

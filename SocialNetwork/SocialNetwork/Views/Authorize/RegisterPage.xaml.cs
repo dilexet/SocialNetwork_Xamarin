@@ -8,6 +8,7 @@ namespace SocialNetwork.Views.Authorize
         {
             InitializeComponent();
             Xamarin.Forms.NavigationPage.SetHasBackButton(this, false);
+            Xamarin.Forms.NavigationPage.SetHasNavigationBar(this, false);
         }
 
         private void UsernameText_OnTextChanged(object sender, EventArgs e)

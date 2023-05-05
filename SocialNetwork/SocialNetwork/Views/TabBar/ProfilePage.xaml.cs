@@ -9,6 +9,8 @@ namespace SocialNetwork.Views.TabBar
         public ProfilePage()
         {
             InitializeComponent();
+            NavigationPage.SetHasBackButton(this, false);
+            NavigationPage.SetHasNavigationBar(this, false);
         }
     }
 }
