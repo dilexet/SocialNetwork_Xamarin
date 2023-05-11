@@ -102,12 +102,13 @@
                 </Frame>
             </StackLayout>
             <StackLayout>
-                <ListView ItemTemplate="{StaticResource MessageTemplateSelector}"
-                          ItemsSource="{Binding Messages}"
-                          FlowDirection="RightToLeft"
-                          VerticalOptions="FillAndExpand"
-                          Rotation="180"
-                          StyleClass="ChatCollectionViewStyle" />
+                <CollectionView
+                    ItemTemplate="{StaticResource MessageTemplateSelector}"
+                    ItemsSource="{Binding Messages}"
+                    FlowDirection="RightToLeft"
+                    VerticalOptions="FillAndExpand"
+                    Rotation="180"
+                    StyleClass="ChatCollectionViewStyle" />
             </StackLayout>
             <StackLayout>
                 <material:MaterialEditor
