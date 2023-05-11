@@ -22,7 +22,7 @@ namespace SocialNetwork.Droid
 
             Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
             Plugin.MaterialDesignControls.Android.Renderer.Init();
-
+            
             LoadApplication(new App());
         }
 

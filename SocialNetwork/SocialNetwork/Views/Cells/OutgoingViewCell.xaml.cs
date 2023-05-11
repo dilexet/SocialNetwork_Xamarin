@@ -1,12 +1,12 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace SocialNetwork.Views.TabBar
+namespace SocialNetwork.Views.Cells
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ProfilePage : ContentPage
+    public partial class OutgoingViewCell : ViewCell
     {
-        public ProfilePage()
+        public OutgoingViewCell()
         {
             InitializeComponent();
         }

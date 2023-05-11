@@ -2,12 +2,137 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SocialNetwork.Views.TabBar.MessengerPage">
+             x:Class="SocialNetwork.Views.TabBar.MessengerPage"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:models="clr-namespace:SocialNetwork.ModelsView;assembly=SocialNetwork"
+             xmlns:local="clr-namespace:SocialNetwork.Converters;assembly=SocialNetwork"
+             BackgroundColor="#EAEBEE"
+             Visual="Material">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:VisibleConverter x:Key="VisibleConverter" />
+        </ResourceDictionary>
+        <Style TargetType="CollectionView" Class="ChatsCollectionViewStyle">
+            <Setter Property="Margin" Value="0,10,0,10" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Setter Property="SelectionMode" Value="Single" />
+        </Style>
+        <Style TargetType="Frame" Class="ChatItemFrameStyle">
+            <Setter Property="HeightRequest" Value="55" />
+            <Setter Property="CornerRadius" Value="15" />
+            <Setter Property="HasShadow" Value="False" />
+            <Setter Property="BorderColor" Value="#F5F5F5" />
+            <Setter Property="BackgroundColor" Value="#FFFFFF" />
+            <Setter Property="Padding" Value="15,10,15,20" />
+        </Style>
+        <Style TargetType="StackLayout" Class="ImageStackLayout">
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="StartAndExpand" />
+        </Style>
+        <Style TargetType="StackLayout" Class="MessageInfoStackLayout">
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="StartAndExpand" />
+            <Setter Property="Margin" Value="10,0,0,0" />
+        </Style>
+        <Style TargetType="StackLayout" Class="ChatInfoStackLayout">
+            <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+            <Setter Property="VerticalOptions" Value="StartAndExpand" />
+        </Style>
+        <Style TargetType="StackLayout" Class="UnreadMessagesStackLayout">
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        </Style>
+        <Style TargetType="ffimageloading:CachedImage" Class="ProfileImageStyle">
+            <Setter Property="HeightRequest" Value="50" />
+            <Setter Property="WidthRequest" Value="50" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="Aspect" Value="AspectFit" />
+            <Setter Property="DownsampleToViewSize" Value="True" />
+        </Style>
+        <Style TargetType="Label" Class="UsernameLabelStyle">
+            <Setter Property="TextColor" Value="#222222" />
+            <Setter Property="FontFamily" Value="RobotoBold" />
+        </Style>
+        <Style TargetType="Label" Class="MessageLabelStyle">
+            <Setter Property="TextColor" Value="#8B8D8F" />
+            <Setter Property="LineBreakMode" Value="TailTruncation" />
+            <Setter Property="FontFamily" Value="RobotoMedium" />
+        </Style>
+        <Style TargetType="Label" Class="DateLabelStyle">
+            <Setter Property="TextColor" Value="#97989C" />
+            <Setter Property="FontFamily" Value="RobotoLight" />
+        </Style>
+        <Style TargetType="BoxView" Class="UnreadMessagesBoxView">
+            <Setter Property="WidthRequest" Value="25" />
+            <Setter Property="HeightRequest" Value="25" />
+            <Setter Property="BackgroundColor" Value="#C5C9CB" />
+            <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.5,0.5,25,25" />
+            <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional" />
+        </Style>
+        <Style TargetType="Label" Class="NumberOfUnreadMessagesLabelStyle">
+            <Setter Property="TextColor" Value="#FFFFFF" />
+            <Setter Property="FontFamily" Value="RobotoRegular" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.5,0.5,25,25" />
+            <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional" />
+        </Style>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Messenger page"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <CollectionView x:Name="ChatsView"
+                            StyleClass="ChatsCollectionViewStyle"
+                            SelectionChanged="ChatsView_OnSelectionChanged">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="1" VerticalItemSpacing="5" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame StyleClass="ChatItemFrameStyle">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#F9F9F9" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <StackLayout x:DataType="models:ChatDto" Orientation="Horizontal">
+                                <StackLayout StyleClass="ImageStackLayout">
+                                    <ffimageloading:CachedImage
+                                        StyleClass="ProfileImageStyle"
+                                        Source="{Binding ProfileImageUri}">
+                                        <ffimageloading:CachedImage.Transformations>
+                                            <fftransformations:CircleTransformation />
+                                        </ffimageloading:CachedImage.Transformations>
+                                    </ffimageloading:CachedImage>
+                                </StackLayout>
+                                <StackLayout StyleClass="MessageInfoStackLayout">
+                                    <Label Text="{Binding Username}" StyleClass="UsernameLabelStyle" />
+                                    <Label Text="{Binding LastMessageText}" StyleClass="MessageLabelStyle" />
+                                </StackLayout>
+                                <StackLayout StyleClass="ChatInfoStackLayout">
+                                    <StackLayout>
+                                        <Label Text="{Binding LastMessageDate}" StyleClass="DateLabelStyle" />
+                                    </StackLayout>
+                                    <StackLayout StyleClass="UnreadMessagesStackLayout">
+                                        <AbsoluteLayout
+                                            IsVisible="{Binding NumberOfUnreadMessages, Converter={StaticResource VisibleConverter}}">
+                                            <BoxView StyleClass="UnreadMessagesBoxView" CornerRadius="50" />
+                                            <Label Text="{Binding NumberOfUnreadMessages}"
+                                                   StyleClass="NumberOfUnreadMessagesLabelStyle" />
+                                        </AbsoluteLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

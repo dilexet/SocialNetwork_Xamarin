@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          xmlns:modelsView="clr-namespace:SocialNetwork.ModelsView;assembly=SocialNetwork"
+          x:Class="SocialNetwork.Views.Cells.IncomingViewCell">
+    <ContentView>
+        <ContentView.Resources>
+            <Style TargetType="Frame" Class="MessageItemFrameStyle">
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="BorderColor" Value="#F5F5F5" />
+                <Setter Property="BackgroundColor" Value="#FFFFFF" />
+                <Setter Property="Padding" Value="15,10,15,20" />
+            </Style>
+            <Style TargetType="Label" Class="MessageLabelStyle">
+                <Setter Property="TextColor" Value="#000000" />
+                <Setter Property="FontFamily" Value="RobotoRegular" />
+            </Style>
+            <Style TargetType="Label" Class="DateMessageSentLabelStyle">
+                <Setter Property="TextColor" Value="#A3A8AD" />
+                <Setter Property="FontFamily" Value="RobotoLight" />
+            </Style>
+        </ContentView.Resources>
+        <ContentView.Content>
+            <Frame StyleClass="MessageItemFrameStyle"
+                   FlowDirection="LeftToRight"
+                   Rotation="180">
+                <StackLayout x:DataType="modelsView:MessageDto" Orientation="Vertical">
+                    <Label Text="{Binding Text}" StyleClass="MessageLabelStyle" />
+                    <Label Text="{Binding DateMessageSent}" StyleClass="DateMessageSentLabelStyle" />
+                </StackLayout>
+            </Frame>
+        </ContentView.Content>
+    </ContentView>
+</ViewCell>

@@ -108,9 +108,6 @@
                                     <ffimageloading:CachedImage
                                         StyleClass="PostImageStyle"
                                         Source="{Binding ImageUri}">
-                                        <ffimageloading:CachedImage.Transformations>
-                                            <fftransformations:RoundedTransformation Radius="150" />
-                                        </ffimageloading:CachedImage.Transformations>
                                     </ffimageloading:CachedImage>
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal"

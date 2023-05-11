@@ -7,11 +7,11 @@ using SocialNetwork.ModelsView;
 
 namespace SocialNetwork.Services
 {
-    public class MockDataStore
+    public class NewsMockDataStore
     {
         private readonly IEnumerable<News> _news;
 
-        public MockDataStore()
+        public NewsMockDataStore()
         {
             _news = new List<News>()
             {

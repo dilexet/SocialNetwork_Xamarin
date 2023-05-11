@@ -9,20 +9,18 @@ namespace SocialNetwork.Views.TabBar
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewsPage : ContentPage
     {
-        private readonly MockDataStore _mockDataStore;
+        private readonly NewsMockDataStore _newsMockDataStore;
 
         public NewsPage()
         {
             InitializeComponent();
             Resources.Add("BackgroundColorConverter", new BackgroundColorConverter());
-            NavigationPage.SetHasBackButton(this, false);
-            NavigationPage.SetHasNavigationBar(this, false);
-            _mockDataStore = new MockDataStore();
+            _newsMockDataStore = new NewsMockDataStore();
         }
 
         protected async override void OnAppearing()
         {
-            NewsView.ItemsSource = await _mockDataStore.GetNews();
+            NewsView.ItemsSource = await _newsMockDataStore.GetNews();
             base.OnAppearing();
         }
 

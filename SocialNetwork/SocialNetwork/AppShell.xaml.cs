@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using SocialNetwork.Views.Navigation;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace SocialNetwork
@@ -9,6 +10,8 @@ namespace SocialNetwork
         public AppShell()
         {
             InitializeComponent();
+            SetNavBarIsVisible(this, false);
+            Routing.RegisterRoute(nameof(ChatPage), typeof(ChatPage));
         }
     }
 }

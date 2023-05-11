@@ -1,5 +1,4 @@
-﻿using SocialNetwork.Views;
-using SocialNetwork.Views.Authorize;
+﻿using SocialNetwork.Views.Authorize;
 using Xamarin.Forms;
 
 namespace SocialNetwork

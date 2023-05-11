@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SocialNetwork.Views.Navigation.ChatPage"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:models="clr-namespace:SocialNetwork.ModelsView;assembly=SocialNetwork"
+             xmlns:local="clr-namespace:SocialNetwork.ViewModels;assembly=SocialNetwork"
+             xmlns:material="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:templates="clr-namespace:SocialNetwork.Templates;assembly=SocialNetwork"
+             BackgroundColor="#EAEBEE"
+             Visual="Material">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="TextColor">#000000</Color>
+            <Color x:Key="BackgroundColor">#FFFFFF</Color>
+            <Color x:Key="PlaceholderColor">#000000</Color>
+            <Color x:Key="BorderColor">#F5F5F5</Color>
+        </ResourceDictionary>
+        <ResourceDictionary>
+            <templates:ChatTemplateSelector x:Key="MessageTemplateSelector" />
+        </ResourceDictionary>
+        <Style TargetType="ListView" Class="ChatCollectionViewStyle">
+            <Setter Property="Margin" Value="0,10,0,10" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Setter Property="SelectionMode" Value="None" />
+        </Style>
+        <Style TargetType="Frame" Class="ChatItemFrameStyle">
+            <Setter Property="HeightRequest" Value="55" />
+            <Setter Property="CornerRadius" Value="15" />
+            <Setter Property="HasShadow" Value="False" />
+            <Setter Property="BorderColor" Value="#F5F5F5" />
+            <Setter Property="BackgroundColor" Value="#FFFFFF" />
+            <Setter Property="Padding" Value="15,10,15,20" />
+        </Style>
+
+        <Style TargetType="StackLayout" Class="ImageStackLayout">
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="StartAndExpand" />
+        </Style>
+        <Style TargetType="ffimageloading:CachedImage" Class="ProfileImageStyle">
+            <Setter Property="HeightRequest" Value="50" />
+            <Setter Property="WidthRequest" Value="50" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="Aspect" Value="AspectFit" />
+            <Setter Property="DownsampleToViewSize" Value="True" />
+        </Style>
+        <Style TargetType="StackLayout" Class="UserInfoStackLayout">
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="VerticalOptions" Value="StartAndExpand" />
+            <Setter Property="Margin" Value="10,0,0,0" />
+        </Style>
+        <Style TargetType="Label" Class="UsernameLabelStyle">
+            <Setter Property="TextColor" Value="#222222" />
+            <Setter Property="FontFamily" Value="RobotoBold" />
+        </Style>
+        <Style TargetType="material:MaterialEditor" Class="MaterialEditorStyle">
+            <Setter Property="Type" Value="Filled" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Placeholder" Value="Message" />
+            <Setter Property="TabIndex" Value="1" />
+            <Setter Property="AutoSize" Value="TextChanges" />
+            <Setter Property="ClearIconIsVisible" Value="False" />
+            <Setter Property="TextColor" Value="{StaticResource TextColor}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource BackgroundColor}" />
+            <Setter Property="PlaceholderColor" Value="{StaticResource PlaceholderColor}" />
+            <Setter Property="BorderColor" Value="{StaticResource BorderColor}" />
+        </Style>
+        <Style TargetType="material:MaterialFloatingButton" Class="MessageSendButtonStyle">
+            <Setter Property="Animation" Value="Fade" />
+            <Setter Property="ButtonSize" Value="Mini" />
+            <Setter Property="WidthRequest" Value="30" />
+            <Setter Property="HeightRequest" Value="30" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="CornerRadius" Value="50" />
+            <Setter Property="BackgroundColor" Value="#FFFFFF" />
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout>
+                <Frame StyleClass="ChatItemFrameStyle" HeightRequest="50">
+                    <StackLayout x:DataType="models:ChatDto" Orientation="Horizontal">
+                        <StackLayout StyleClass="ImageStackLayout">
+                            <ffimageloading:CachedImage
+                                StyleClass="ProfileImageStyle"
+                                Source="{Binding ProfileImageUri}">
+                                <ffimageloading:CachedImage.Transformations>
+                                    <fftransformations:CircleTransformation />
+                                </ffimageloading:CachedImage.Transformations>
+                            </ffimageloading:CachedImage>
+                        </StackLayout>
+                        <StackLayout StyleClass="UserInfoStackLayout">
+                            <Label Text="{Binding Username}" StyleClass="UsernameLabelStyle" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+            <StackLayout>
+                <ListView ItemTemplate="{StaticResource MessageTemplateSelector}"
+                          ItemsSource="{Binding Messages}"
+                          FlowDirection="RightToLeft"
+                          VerticalOptions="FillAndExpand"
+                          Rotation="180"
+                          StyleClass="ChatCollectionViewStyle" />
+            </StackLayout>
+            <StackLayout>
+                <material:MaterialEditor
+                    x:Name="MessageText"
+                    TextChanged="MessageText_OnTextChanged"
+                    StyleClass="MaterialEditorStyle">
+                    <material:MaterialEditor.CustomTrailingIcon>
+                        <material:MaterialFloatingButton StyleClass="MessageSendButtonStyle">
+                            <material:MaterialFloatingButton.CustomIcon>
+                                <ffimageloadingsvg:SvgCachedImage
+                                    Source="resource://SocialNetwork.Resources.send_18dp.svg" />
+                            </material:MaterialFloatingButton.CustomIcon>
+                        </material:MaterialFloatingButton>
+                    </material:MaterialEditor.CustomTrailingIcon>
+                </material:MaterialEditor>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

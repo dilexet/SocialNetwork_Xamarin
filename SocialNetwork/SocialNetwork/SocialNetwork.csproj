@@ -65,6 +65,8 @@
     <EmbeddedResource Include="Resources\favorite_on_24dp.svg" />
     <None Remove="Resources\comments.svg" />
     <EmbeddedResource Include="Resources\comments.svg" />
+    <None Remove="Resources\send_18dp.svg" />
+    <EmbeddedResource Include="Resources\send_18dp.svg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -96,9 +98,5 @@
       <DependentUpon>ProfilePage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 </Project>
