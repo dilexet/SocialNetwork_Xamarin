@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using SocialNetwork.Models;
 using SocialNetwork.ModelsView;
 
@@ -128,19 +127,25 @@ namespace SocialNetwork.Services
             };
         }
 
-        public IEnumerable<MessageDto> GetMessages()
+        public ObservableCollection<Grouping<string, MessageDto>> GetMessages()
         {
-            return _messages
+            var groups = _messages
                 .ToList()
-                .OrderByDescending(x => x.DateMessageSent)
+                .GroupBy(x => x.DateMessageSent.Date)
                 .Select(x =>
-                    new MessageDto()
-                    {
-                        Id = x.Id,
-                        SenderId = x.SenderId,
-                        Text = x.Text,
-                        DateMessageSent = x.DateMessageSent.ToString("dd MMM HH:mm"),
-                    });
+                    new Grouping<string, MessageDto>(
+                        x.Key.ToString("MMMM dd"),
+                        x.Select(item => new MessageDto()
+                        {
+                            Id = item.Id,
+                            SenderId = item.SenderId,
+                            Text = item.Text,
+                            DateMessageSent = item.DateMessageSent.ToString("HH:mm"),
+                        })
+                    )
+                );
+
+            return new ObservableCollection<Grouping<string, MessageDto>>(groups);
         }
     }
 }

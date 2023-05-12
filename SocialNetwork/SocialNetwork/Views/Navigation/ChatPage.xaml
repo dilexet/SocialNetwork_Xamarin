@@ -37,6 +37,7 @@
             <Setter Property="Rotation" Value="180" />
             <Setter Property="HasUnevenRows" Value="True" />
             <Setter Property="SeparatorColor" Value="Transparent" />
+            <Setter Property="IsGroupingEnabled" Value="True" />
         </Style>
         <Style TargetType="Frame" Class="ChatItemFrameStyle">
             <Setter Property="HeightRequest" Value="50" />
@@ -160,7 +161,17 @@
                 <ListView
                     ItemTemplate="{StaticResource MessageTemplateSelector}"
                     ItemsSource="{Binding Messages}"
-                    StyleClass="ChatListViewStyle" />
+                    StyleClass="ChatListViewStyle">
+                    <ListView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout FlowDirection="LeftToRight" Rotation="180">
+                                    <Label Text="{Binding Date}" FontSize="Large" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.GroupHeaderTemplate>
+                </ListView>
             </StackLayout>
             <StackLayout>
                 <material:MaterialEditor
