@@ -6,12 +6,25 @@
           x:Class="SocialNetwork.Views.Cells.IncomingViewCell">
     <ContentView>
         <ContentView.Resources>
+            <Style TargetType="Frame" Class="IncomingMessageFrameStyle">
+                <Setter Property="Margin" Value="80,10,10,10" />
+                <Setter Property="BackgroundColor" Value="#FFFFFF" />
+            </Style>
             <Style TargetType="Frame" Class="MessageItemFrameStyle">
                 <Setter Property="CornerRadius" Value="15" />
                 <Setter Property="HasShadow" Value="False" />
-                <Setter Property="BorderColor" Value="#F5F5F5" />
-                <Setter Property="BackgroundColor" Value="#FFFFFF" />
                 <Setter Property="Padding" Value="15,10,15,20" />
+                <Setter Property="FlowDirection" Value="LeftToRight" />
+                <Setter Property="Rotation" Value="180" />
+            </Style>
+            <Style TargetType="StackLayout" Class="MessageStackLayoutStyle">
+                <Setter Property="Orientation" Value="Vertical" />
+                <Setter Property="VerticalOptions" Value="StartAndExpand" />
+                <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+            </Style>
+            <Style TargetType="StackLayout" Class="MessageDateSentStackLayoutStyle">
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="EndAndExpand" />
             </Style>
             <Style TargetType="Label" Class="MessageLabelStyle">
                 <Setter Property="TextColor" Value="#000000" />
@@ -23,12 +36,12 @@
             </Style>
         </ContentView.Resources>
         <ContentView.Content>
-            <Frame StyleClass="MessageItemFrameStyle"
-                   FlowDirection="LeftToRight"
-                   Rotation="180">
-                <StackLayout x:DataType="modelsView:MessageDto" Orientation="Vertical">
+            <Frame StyleClass="MessageItemFrameStyle, IncomingMessageFrameStyle">
+                <StackLayout x:DataType="modelsView:MessageDto" StyleClass="MessageStackLayoutStyle">
                     <Label Text="{Binding Text}" StyleClass="MessageLabelStyle" />
-                    <Label Text="{Binding DateMessageSent}" StyleClass="DateMessageSentLabelStyle" />
+                    <StackLayout StyleClass="MessageDateSentStackLayoutStyle">
+                        <Label Text="{Binding DateMessageSent}" StyleClass="DateMessageSentLabelStyle" />
+                    </StackLayout>
                 </StackLayout>
             </Frame>
         </ContentView.Content>

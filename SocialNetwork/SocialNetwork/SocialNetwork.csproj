@@ -67,6 +67,14 @@
     <EmbeddedResource Include="Resources\comments.svg" />
     <None Remove="Resources\send_18dp.svg" />
     <EmbeddedResource Include="Resources\send_18dp.svg" />
+    <None Remove="Resources\arrow_back_24dp.svg" />
+    <EmbeddedResource Include="Resources\arrow_back_24dp.svg" />
+    <None Remove="Resources\more_vert_24dp.svg" />
+    <EmbeddedResource Include="Resources\more_vert_24dp.svg" />
+    <None Remove="Resources\more_vert_36dp.svg" />
+    <EmbeddedResource Include="Resources\more_vert_36dp.svg" />
+    <None Remove="Resources\arrow_back_36dp.svg" />
+    <EmbeddedResource Include="Resources\arrow_back_36dp.svg" />
   </ItemGroup>
 
   <ItemGroup>
