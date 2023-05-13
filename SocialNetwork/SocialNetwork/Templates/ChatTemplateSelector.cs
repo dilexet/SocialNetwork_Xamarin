@@ -1,19 +1,20 @@
 ﻿using SocialNetwork.ModelsView;
 using SocialNetwork.Services;
-using SocialNetwork.Views.Cells;
+using SocialNetwork.Views.Partial;
 using Xamarin.Forms;
 
 namespace SocialNetwork.Templates
 {
     public class ChatTemplateSelector : DataTemplateSelector
     {
-        private readonly DataTemplate _incomingDataTemplate;
-        private readonly DataTemplate _outgoingDataTemplate;
+        private DataTemplate IncomingDataTemplate { get; }
+
+        private DataTemplate OutgoingDataTemplate { get; }
 
         public ChatTemplateSelector()
         {
-            _incomingDataTemplate = new DataTemplate(typeof(IncomingViewCell));
-            _outgoingDataTemplate = new DataTemplate(typeof(OutgoingViewCell));
+            IncomingDataTemplate = new DataTemplate(typeof(IncomingMessageTemplate));
+            OutgoingDataTemplate = new DataTemplate(typeof(OutgoingMessageTemplate));
         }
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
@@ -21,8 +22,8 @@ namespace SocialNetwork.Templates
             var senderId = ((MessageDto)item).SenderId;
             var myId = MessagesMockDataStore.MyId;
             return senderId == myId
-                ? _outgoingDataTemplate
-                : _incomingDataTemplate;
+                ? OutgoingDataTemplate
+                : IncomingDataTemplate;
         }
     }
 }

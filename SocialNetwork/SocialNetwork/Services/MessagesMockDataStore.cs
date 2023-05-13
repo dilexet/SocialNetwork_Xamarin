@@ -127,25 +127,39 @@ namespace SocialNetwork.Services
             };
         }
 
-        public ObservableCollection<Grouping<string, MessageDto>> GetMessages()
-        {
-            var groups = _messages
-                .ToList()
-                .GroupBy(x => x.DateMessageSent.Date)
-                .Select(x =>
-                    new Grouping<string, MessageDto>(
-                        x.Key.ToString("MMMM dd"),
-                        x.Select(item => new MessageDto()
-                        {
-                            Id = item.Id,
-                            SenderId = item.SenderId,
-                            Text = item.Text,
-                            DateMessageSent = item.DateMessageSent.ToString("HH:mm"),
-                        })
-                    )
-                );
+        // public ObservableCollection<Grouping<string, MessageDto>> GetMessages()
+        // {
+        //     var groups = _messages
+        //         .ToList()
+        //         .GroupBy(x => x.DateMessageSent.Date)
+        //         .Select(x =>
+        //             new Grouping<string, MessageDto>(
+        //                 x.Key.ToString("MMMM dd"),
+        //                 x.Select(item => new MessageDto()
+        //                 {
+        //                     Id = item.Id,
+        //                     SenderId = item.SenderId,
+        //                     Text = item.Text,
+        //                     DateMessageSent = item.DateMessageSent.ToString("HH:mm"),
+        //                 })
+        //             )
+        //         );
+        //
+        //     return new ObservableCollection<Grouping<string, MessageDto>>(groups);
+        // }
 
-            return new ObservableCollection<Grouping<string, MessageDto>>(groups);
+        public IEnumerable<MessageDto> GetMessages()
+        {
+            return _messages
+                .ToList()
+                .OrderByDescending(x => x.DateMessageSent)
+                .Select(x => new MessageDto()
+                {
+                    Id = x.Id,
+                    SenderId = x.SenderId,
+                    Text = x.Text,
+                    DateMessageSent = x.DateMessageSent.ToString("HH:mm")
+                });
         }
     }
 }

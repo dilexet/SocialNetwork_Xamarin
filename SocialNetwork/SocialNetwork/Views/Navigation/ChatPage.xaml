@@ -24,10 +24,8 @@
             <Color x:Key="MessageSendButtonButtonColor">#FFFFFF</Color>
             <Color x:Key="PreviousPageButtonColor">#517DA2</Color>
         </ResourceDictionary>
-        <ResourceDictionary>
-            <templates:ChatTemplateSelector x:Key="MessageTemplateSelector" />
-        </ResourceDictionary>
-        <Style TargetType="ListView" Class="ChatListViewStyle">
+        <templates:ChatTemplateSelector x:Key="MessageTemplateSelector" />
+        <Style TargetType="CollectionView" Class="ChatViewStyle">
             <Setter Property="Margin" Value="0,10,0,10" />
             <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
             <Setter Property="SelectionMode" Value="None" />
@@ -35,9 +33,6 @@
             <Setter Property="VerticalOptions" Value="FillAndExpand" />
             <Setter Property="VerticalScrollBarVisibility" Value="Never" />
             <Setter Property="Rotation" Value="180" />
-            <Setter Property="HasUnevenRows" Value="True" />
-            <Setter Property="SeparatorColor" Value="Transparent" />
-            <Setter Property="IsGroupingEnabled" Value="True" />
         </Style>
         <Style TargetType="Frame" Class="ChatItemFrameStyle">
             <Setter Property="HeightRequest" Value="50" />
@@ -158,20 +153,14 @@
                 </Frame>
             </StackLayout>
             <StackLayout>
-                <ListView
+                <CollectionView
                     ItemTemplate="{StaticResource MessageTemplateSelector}"
                     ItemsSource="{Binding Messages}"
-                    StyleClass="ChatListViewStyle">
-                    <ListView.GroupHeaderTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <StackLayout FlowDirection="LeftToRight" Rotation="180">
-                                    <Label Text="{Binding Date}" FontSize="Large" />
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.GroupHeaderTemplate>
-                </ListView>
+                    StyleClass="ChatViewStyle">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="15" Span="1" />
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
             </StackLayout>
             <StackLayout>
                 <material:MaterialEditor

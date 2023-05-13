@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using SocialNetwork.Services;
 
@@ -18,6 +20,6 @@ namespace SocialNetwork.ModelsView
 
         public uint NumberOfUnreadMessages { get; set; }
 
-        public ObservableCollection<Grouping<string, MessageDto>> Messages { get; set; }
+        public IEnumerable<MessageDto> Messages { get; set; }
     }
 }
