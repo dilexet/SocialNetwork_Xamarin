@@ -9,7 +9,7 @@
              xmlns:material="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:templates="clr-namespace:SocialNetwork.Templates;assembly=SocialNetwork"
-             BackgroundColor="#EAEBEE"
+             BackgroundColor="#C2E2ED"
              Visual="Material">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -26,7 +26,7 @@
         </ResourceDictionary>
         <templates:ChatTemplateSelector x:Key="MessageTemplateSelector" />
         <Style TargetType="CollectionView" Class="ChatViewStyle">
-            <Setter Property="Margin" Value="0,10,0,10" />
+            <Setter Property="Margin" Value="0" />
             <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
             <Setter Property="SelectionMode" Value="None" />
             <Setter Property="FlowDirection" Value="RightToLeft" />
@@ -156,9 +156,38 @@
                 <CollectionView
                     ItemTemplate="{StaticResource MessageTemplateSelector}"
                     ItemsSource="{Binding Messages}"
+                    IsGrouped="True"
                     StyleClass="ChatViewStyle">
+                    <CollectionView.GroupFooterTemplate>
+                        <DataTemplate>
+                            <StackLayout
+                                FlowDirection="LeftToRight"
+                                Rotation="180"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center">
+                                <Frame
+                                    VerticalOptions="CenterAndExpand"
+                                    HorizontalOptions="CenterAndExpand"
+                                    HeightRequest="20"
+                                    Margin="0"
+                                    Padding="10,5,10,5"
+                                    BackgroundColor="#464646"
+                                    Opacity="0.7"
+                                    HasShadow="False"
+                                    CornerRadius="20">
+                                    <Label Text="{Binding Date}"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center"
+                                           TextColor="#FFFFFF"
+                                           FontFamily="RobotoLight" />
+                                </Frame>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.GroupFooterTemplate>
                     <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="15" Span="1" />
+                        <GridItemsLayout Orientation="Vertical"
+                                         VerticalItemSpacing="15"
+                                         Span="1" />
                     </CollectionView.ItemsLayout>
                 </CollectionView>
             </StackLayout>
