@@ -7,7 +7,7 @@
     <ContentView.Resources>
         <Style TargetType="Frame" Class="OutgoingMessageFrameStyle">
             <Setter Property="BackgroundColor" Value="#EFFEDD" />
-            <Setter Property="Margin" Value="10,0,80,0" />
+            <!-- <Setter Property="Margin" Value="10,0,80,0" /> -->
         </Style>
         <Style TargetType="Frame" Class="MessageItemFrameStyle">
             <Setter Property="CornerRadius" Value="15" />
@@ -34,13 +34,19 @@
         </Style>
     </ContentView.Resources>
     <ContentView.Content>
-        <Frame StyleClass="MessageItemFrameStyle, OutgoingMessageFrameStyle">
-            <StackLayout x:DataType="modelsView:MessageDto" StyleClass="MessageStackLayoutStyle">
-                <Label Text="{Binding Text}" StyleClass="MessageLabelStyle" />
-                <StackLayout StyleClass="MessageDateSentStackLayoutStyle">
-                    <Label Text="{Binding DateMessageSent}" StyleClass="DateMessageSentLabelStyle" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Frame Grid.Column="1" StyleClass="MessageItemFrameStyle, OutgoingMessageFrameStyle">
+                <StackLayout x:DataType="modelsView:MessageDto" StyleClass="MessageStackLayoutStyle">
+                    <Label Text="{Binding Text}" StyleClass="MessageLabelStyle" />
+                    <StackLayout StyleClass="MessageDateSentStackLayoutStyle">
+                        <Label Text="{Binding DateMessageSent}" StyleClass="DateMessageSentLabelStyle" />
+                    </StackLayout>
                 </StackLayout>
-            </StackLayout>
-        </Frame>
+            </Frame>
+        </Grid>
     </ContentView.Content>
 </ContentView>

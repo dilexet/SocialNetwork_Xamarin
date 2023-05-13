@@ -7,7 +7,7 @@
     <ContentView.Resources>
         <Style TargetType="Frame" Class="IncomingMessageFrameStyle">
             <Setter Property="BackgroundColor" Value="#FFFFFF" />
-            <Setter Property="Margin" Value="80,0,10,0" />
+            <!-- <Setter Property="Margin" Value="80,0,10,0" /> -->
         </Style>
         <Style TargetType="Frame" Class="MessageItemFrameStyle">
             <Setter Property="CornerRadius" Value="15" />
@@ -34,13 +34,26 @@
         </Style>
     </ContentView.Resources>
     <ContentView.Content>
-        <Frame StyleClass="MessageItemFrameStyle, IncomingMessageFrameStyle">
-            <StackLayout x:DataType="modelsView:MessageDto" StyleClass="MessageStackLayoutStyle">
-                <Label Text="{Binding Text}" StyleClass="MessageLabelStyle" />
-                <StackLayout StyleClass="MessageDateSentStackLayoutStyle">
-                    <Label Text="{Binding DateMessageSent}" StyleClass="DateMessageSentLabelStyle" />
-                </StackLayout>
-            </StackLayout>
-        </Frame>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Frame Grid.Column="1" StyleClass="MessageItemFrameStyle, IncomingMessageFrameStyle">
+                    <StackLayout x:DataType="modelsView:MessageDto" StyleClass="MessageStackLayoutStyle">
+                        <Label Text="{Binding Text}" StyleClass="MessageLabelStyle" />
+                        <StackLayout StyleClass="MessageDateSentStackLayoutStyle">
+                            <Label Text="{Binding DateMessageSent}" StyleClass="DateMessageSentLabelStyle" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+        </Grid>
     </ContentView.Content>
 </ContentView>
