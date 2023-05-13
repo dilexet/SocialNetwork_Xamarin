@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using SocialNetwork.Models;
 using SocialNetwork.ModelsView;
 
@@ -60,7 +58,7 @@ namespace SocialNetwork.Services
                     Id = Guid.NewGuid(),
                     SenderId = MyId,
                     Text = "Thanks for letting me know.",
-                    DateMessageSent = dateNow.AddMinutes(-45)
+                    DateMessageSent = dateNow.AddMonths(-5)
                 },
                 new Message
                 {
@@ -74,7 +72,7 @@ namespace SocialNetwork.Services
                     Id = Guid.NewGuid(),
                     SenderId = MyId,
                     Text = "Can you give me a call when you get a chance?",
-                    DateMessageSent = dateNow.AddMinutes(-15)
+                    DateMessageSent = dateNow.AddMonths(-5)
                 },
                 new Message
                 {
@@ -128,19 +126,31 @@ namespace SocialNetwork.Services
             };
         }
 
-        public IEnumerable<MessageDto> GetMessages()
+        public IEnumerable<MessageGroup<string, MessageDto>> GetMessages()
         {
-            return _messages
+            var groups = _messages
                 .ToList()
-                .OrderByDescending(x => x.DateMessageSent)
+                .GroupBy(x => x.DateMessageSent.Date)
                 .Select(x =>
-                    new MessageDto()
+                    new MessageGroup<DateTime, Message>(
+                        x.Key.Date,
+                        x.OrderByDescending(msg => msg.DateMessageSent.Ticks)
+                    )
+                )
+                .OrderByDescending(x => x.Date);
+
+            return groups.Select(x =>
+                new MessageGroup<string, MessageDto>(
+                    x.Date.ToString("MMMM dd"),
+                    x.Select(item => new MessageDto()
                     {
-                        Id = x.Id,
-                        SenderId = x.SenderId,
-                        Text = x.Text,
-                        DateMessageSent = x.DateMessageSent.ToString("dd MMM HH:mm"),
-                    });
+                        Id = item.Id,
+                        SenderId = item.SenderId,
+                        Text = item.Text,
+                        DateMessageSent = item.DateMessageSent.ToString("HH:mm")
+                    })
+                )
+            );
         }
     }
 }

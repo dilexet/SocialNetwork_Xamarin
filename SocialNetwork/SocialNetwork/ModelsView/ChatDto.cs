@@ -17,6 +17,6 @@ namespace SocialNetwork.ModelsView
 
         public uint NumberOfUnreadMessages { get; set; }
 
-        public IEnumerable<MessageDto> Messages { get; set; }
+        public IEnumerable<MessageGroup<string, MessageDto>> Messages { get; set; }
     }
 }
