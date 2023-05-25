@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using SocialNetwork.Models;
@@ -151,7 +152,7 @@ namespace SocialNetwork.Services
                 LastMessageText = chat.LastMessageText,
                 LastMessageDate = ConvertDate(chat.LastMessageDate),
                 NumberOfUnreadMessages = chat.NumberOfUnreadMessages,
-                Messages = messagesMockDataStore.GetMessages()
+                Messages = new ObservableCollection<MessageGroup<string, MessageDto>>(messagesMockDataStore.GetMessages())
             };
 
             return chatDto;

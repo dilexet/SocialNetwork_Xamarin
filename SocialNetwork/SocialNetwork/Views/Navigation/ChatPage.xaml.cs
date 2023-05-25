@@ -1,5 +1,5 @@
 ﻿using System;
-using SocialNetwork.Services;
+using SocialNetwork.ViewModels;
 using SocialNetwork.Views.TabBar;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,8 +10,6 @@ namespace SocialNetwork.Views.Navigation
     [QueryProperty(nameof(ChatId), nameof(ChatId))]
     public partial class ChatPage : ContentPage
     {
-        private readonly ChatsMockDataStore _chatsMockDataStore;
-
         public string ChatId
         {
             set => LoadChat(value);
@@ -20,15 +18,15 @@ namespace SocialNetwork.Views.Navigation
         public ChatPage()
         {
             InitializeComponent();
-            _chatsMockDataStore = ChatsMockDataStore.GetInstance();
             Shell.SetTabBarIsVisible(this, false);
         }
 
         private void LoadChat(string value)
         {
             Guid id = Guid.Parse(value);
-            var chat = _chatsMockDataStore.GetChatById(id);
-            BindingContext = chat;
+            var messageViewModel = new MessageViewModel();
+            messageViewModel.LoadMessages(id);
+            BindingContext = messageViewModel;
         }
 
         private void MessageText_OnTextChanged(object sender, EventArgs e)
