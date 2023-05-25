@@ -11,12 +11,10 @@ namespace SocialNetwork.Views.TabBar
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MessengerPage : ContentPage
     {
-        private readonly ChatsMockDataStore _chatsMockDataStore;
 
         public MessengerPage()
         {
             InitializeComponent();
-            _chatsMockDataStore = ChatsMockDataStore.GetInstance();
         }
 
         protected async override void OnAppearing()

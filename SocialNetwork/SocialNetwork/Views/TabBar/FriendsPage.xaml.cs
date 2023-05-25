@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using SocialNetwork.ViewModels;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace SocialNetwork.Views.TabBar
@@ -9,6 +10,9 @@ namespace SocialNetwork.Views.TabBar
         public FriendsPage()
         {
             InitializeComponent();
+            var friendViewModel = new FriendViewModel();
+            friendViewModel.LoadFriends();
+            BindingContext = friendViewModel;
         }
     }
 }
