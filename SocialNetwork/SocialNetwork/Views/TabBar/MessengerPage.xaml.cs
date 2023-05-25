@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using SocialNetwork.ModelsView;
 using SocialNetwork.Services;
+using SocialNetwork.ViewModels;
 using SocialNetwork.Views.Navigation;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -20,7 +21,9 @@ namespace SocialNetwork.Views.TabBar
 
         protected async override void OnAppearing()
         {
-            ChatsView.ItemsSource = await _chatsMockDataStore.GetChats();
+            var chatViewModel = new ChatViewModel();
+            await chatViewModel.LoadChats();
+            BindingContext = chatViewModel;
             base.OnAppearing();
         }
 

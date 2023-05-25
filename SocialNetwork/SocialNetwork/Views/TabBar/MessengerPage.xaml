@@ -84,6 +84,7 @@
     <ContentPage.Content>
         <ScrollView>
             <CollectionView x:Name="ChatsView"
+                            ItemsSource="{Binding Chats}"
                             StyleClass="ChatsCollectionViewStyle"
                             SelectionChanged="ChatsView_OnSelectionChanged">
                 <CollectionView.ItemsLayout>
