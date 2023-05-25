@@ -34,9 +34,10 @@
         </Style>
     </ContentView.Resources>
     <ContentView.Content>
+
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="6*" />
+                <ColumnDefinition Width="5*" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
@@ -45,7 +46,12 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Frame Grid.Column="1" StyleClass="MessageItemFrameStyle, IncomingMessageFrameStyle">
+
+                <Frame Grid.Column="1"
+                       HorizontalOptions="Start"
+                       VerticalOptions="Center"
+                       Margin="5"
+                       StyleClass="MessageItemFrameStyle, IncomingMessageFrameStyle">
                     <StackLayout x:DataType="modelsView:MessageDto" StyleClass="MessageStackLayoutStyle">
                         <Label Text="{Binding Text}" StyleClass="MessageLabelStyle" />
                         <StackLayout StyleClass="MessageDateSentStackLayoutStyle">
