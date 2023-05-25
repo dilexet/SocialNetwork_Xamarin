@@ -140,7 +140,7 @@ namespace SocialNetwork.Services
 
         public IEnumerable<Friend> GerFriends()
         {
-            return _friends.ToList().OrderByDescending(x => x.Username);
+            return _friends.ToList().OrderBy(x => x.Username);
         }
     }
 }
