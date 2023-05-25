@@ -2,12 +2,158 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SocialNetwork.Views.TabBar.FriendsPage">
+             xmlns:models="clr-namespace:SocialNetwork.Models;assembly=SocialNetwork"
+             xmlns:material="clr-namespace:Plugin.MaterialDesignControls;assembly=Plugin.MaterialDesignControls"
+             xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="SocialNetwork.Views.TabBar.FriendsPage"
+             BackgroundColor="#FFFFFF">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="TextColorBlack">#000000</Color>
+            <Color x:Key="TextColorGray">#909398</Color>
+            <Color x:Key="FrameBorderColor">#4C7698</Color>
+            <Color x:Key="FrameBackgroundColor">#517DA2</Color>
+            <Color x:Key="PreviousPageButtonColor">#517DA2</Color>
+            <Color x:Key="ToChatButtonColor">#FFFFFF</Color>
+        </ResourceDictionary>
+        <Style TargetType="Frame" Class="HeaderFrameStyle">
+            <Setter Property="HeightRequest" Value="40" />
+            <Setter Property="CornerRadius" Value="0" />
+            <Setter Property="HasShadow" Value="False" />
+            <Setter Property="BorderColor" Value="{StaticResource FrameBorderColor}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource FrameBackgroundColor}" />
+            <Setter Property="Padding" Value="15,10,15,20" />
+        </Style>
+        <Style TargetType="material:MaterialFloatingButton" Class="MaterialFloatingButtonStyle">
+            <Setter Property="Animation" Value="Fade" />
+            <Setter Property="ButtonSize" Value="Mini" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="CornerRadius" Value="50" />
+            <Setter Property="HasShadow" Value="False" />
+        </Style>
+        <Style TargetType="material:MaterialFloatingButton" Class="PreviousPageButtonStyle">
+            <Setter Property="BackgroundColor" Value="{StaticResource PreviousPageButtonColor}" />
+            <Setter Property="BorderColor" Value="{StaticResource PreviousPageButtonColor}" />
+            <Setter Property="WidthRequest" Value="45" />
+            <Setter Property="HeightRequest" Value="45" />
+        </Style>
+        <Style TargetType="material:MaterialFloatingButton" Class="ToChatButtonStyle">
+            <Setter Property="BackgroundColor" Value="{StaticResource ToChatButtonColor}" />
+            <Setter Property="BorderColor" Value="{StaticResource ToChatButtonColor}" />
+            <Setter Property="ShadowColor" Value="{StaticResource ToChatButtonColor}" />
+            <Setter Property="WidthRequest" Value="45" />
+            <Setter Property="HeightRequest" Value="45" />
+            <Setter Property="HasShadow" Value="False" />
+        </Style>
+        <Style TargetType="StackLayout" Class="FriendsHeaderLayout">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="VerticalOptions" Value="StartAndExpand" />
+            <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+        </Style>
+        <Style TargetType="Label" Class="TextLabel">
+            <Setter Property="TextColor" Value="{StaticResource TextColorBlack}" />
+        </Style>
+        <Style TargetType="Label" Class="UsernameLabel">
+            <Setter Property="FontFamily" Value="RobotoMedium" />
+        </Style>
+        <Style TargetType="Label" Class="UserInfoLabel">
+            <Setter Property="TextColor" Value="{StaticResource TextColorGray}" />
+            <Setter Property="FontFamily" Value="RobotoRegular" />
+        </Style>
+        <Style TargetType="Label" Class="RobotoBoldLabel">
+            <Setter Property="FontFamily" Value="RobotoBold" />
+        </Style>
+        <Style TargetType="Label" Class="NumberOfFriendValueLabel">
+            <Setter Property="TextColor" Value="{StaticResource TextColorGray}" />
+            <Setter Property="Margin" Value="20,0,0,0" />
+        </Style>
+        <Style TargetType="ffimageloading:CachedImage" Class="ProfileImageStyle">
+            <Setter Property="HeightRequest" Value="50" />
+            <Setter Property="WidthRequest" Value="50" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="HorizontalOptions" Value="Start" />
+            <Setter Property="Aspect" Value="AspectFit" />
+            <Setter Property="DownsampleToViewSize" Value="True" />
+        </Style>
+        <Style TargetType="StackLayout" Class="DataStackLayout">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="Padding" Value="10,0,10,0" />
+        </Style>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Friends"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+            <StackLayout>
+                <Frame StyleClass="HeaderFrameStyle">
+                    <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
+                        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                            <material:MaterialFloatingButton Clicked="MaterialFloatingButton_OnClicked"
+                                                             StyleClass="MaterialFloatingButtonStyle,PreviousPageButtonStyle">
+                                <material:MaterialFloatingButton.CustomIcon>
+                                    <forms:SvgCachedImage
+                                        Source="resource://SocialNetwork.Resources.arrow_back_36dp.svg" />
+                                </material:MaterialFloatingButton.CustomIcon>
+                            </material:MaterialFloatingButton>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+            <StackLayout StyleClass="SearchStackLayoutStyle">
+                <!-- TODO: search input -->
+            </StackLayout>
+            <CollectionView
+                ItemsSource="{Binding Friends}"
+                Header="{Binding .}">
+                <CollectionView.HeaderTemplate>
+                    <DataTemplate>
+                        <StackLayout StyleClass="FriendsHeaderLayout">
+                            <Label Text="My friends" StyleClass="TextLabel,RobotoBoldLabel" />
+                            <Label Text="{Binding NumberOfFriends}"
+                                   StyleClass="NumberOfFriendValueLabel,RobotoBoldLabel" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.HeaderTemplate>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="1" VerticalItemSpacing="20" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Friend">
+                        <StackLayout StyleClass="DataStackLayout">
+                            <StackLayout>
+                                <ffimageloading:CachedImage
+                                    StyleClass="ProfileImageStyle"
+                                    Source="{Binding ProfileImageUri}">
+                                    <ffimageloading:CachedImage.Transformations>
+                                        <fftransformations:CircleTransformation />
+                                    </ffimageloading:CachedImage.Transformations>
+                                </ffimageloading:CachedImage>
+                            </StackLayout>
+                            <StackLayout Orientation="Vertical"
+                                         VerticalOptions="CenterAndExpand"
+                                         HorizontalOptions="Start"
+                                         Margin="10,0,0,0">
+                                <Label Text="{Binding Username}" StyleClass="TextLabel,UsernameLabel" />
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Age, StringFormat='{0} years old,'}"
+                                           StyleClass="UserInfoLabel" />
+                                    <Label Text="{Binding CityFrom}" StyleClass="UserInfoLabel" />
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="EndAndExpand">
+                                <material:MaterialFloatingButton Clicked="ToChatButton_OnClicked"
+                                                                 StyleClass="MaterialFloatingButtonStyle,ToChatButtonStyle">
+                                    <material:MaterialFloatingButton.CustomIcon>
+                                        <forms:SvgCachedImage
+                                            Source="resource://SocialNetwork.Resources.chat-24dp-blue.svg" />
+                                    </material:MaterialFloatingButton.CustomIcon>
+                                </material:MaterialFloatingButton>
+                            </StackLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -36,6 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\chat-24dp-blue.svg" />
     <EmbeddedResource Include="Resources\visibility_18dp.svg" />
     <EmbeddedResource Include="Resources\visibility_off_18dp.svg" />
     <None Remove="Resources\highlight_off_18dp.svg" />
@@ -75,6 +76,8 @@
     <EmbeddedResource Include="Resources\more_vert_36dp.svg" />
     <None Remove="Resources\arrow_back_36dp.svg" />
     <EmbeddedResource Include="Resources\arrow_back_36dp.svg" />
+    <None Remove="Resources\search_18dp.svg" />
+    <EmbeddedResource Include="Resources\search_18dp.svg" />
   </ItemGroup>
 
   <ItemGroup>
