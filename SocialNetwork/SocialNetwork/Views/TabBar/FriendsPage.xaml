@@ -11,6 +11,11 @@
              BackgroundColor="#FFFFFF">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <Color x:Key="EntryTextColor">#111E29</Color>
+            <Color x:Key="EntryBackgroundColor">#ECEDF0</Color>
+            <Color x:Key="EntryPlaceholderColor">#7E848D</Color>
+            <Color x:Key="EntryBorderColor">#ECEDF0</Color>
+
             <Color x:Key="TextColorBlack">#000000</Color>
             <Color x:Key="TextColorGray">#909398</Color>
             <Color x:Key="FrameBorderColor">#4C7698</Color>
@@ -19,12 +24,11 @@
             <Color x:Key="ToChatButtonColor">#FFFFFF</Color>
         </ResourceDictionary>
         <Style TargetType="Frame" Class="HeaderFrameStyle">
-            <Setter Property="HeightRequest" Value="40" />
+            <Setter Property="HeightRequest" Value="60" />
             <Setter Property="CornerRadius" Value="0" />
             <Setter Property="HasShadow" Value="False" />
             <Setter Property="BorderColor" Value="{StaticResource FrameBorderColor}" />
             <Setter Property="BackgroundColor" Value="{StaticResource FrameBackgroundColor}" />
-            <Setter Property="Padding" Value="15,10,15,20" />
         </Style>
         <Style TargetType="material:MaterialFloatingButton" Class="MaterialFloatingButtonStyle">
             <Setter Property="Animation" Value="Fade" />
@@ -52,23 +56,28 @@
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="VerticalOptions" Value="StartAndExpand" />
             <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+            <Setter Property="Padding" Value="10,5,0,0" />
         </Style>
-        <Style TargetType="Label" Class="TextLabel">
+        <Style TargetType="Label" Class="HeaderListTitleLabel">
             <Setter Property="TextColor" Value="{StaticResource TextColorBlack}" />
+            <Setter Property="FontFamily" Value="RobotoBold" />
+            <Setter Property="FontSize" Value="17" />
         </Style>
         <Style TargetType="Label" Class="UsernameLabel">
+            <Setter Property="TextColor" Value="{StaticResource TextColorBlack}" />
             <Setter Property="FontFamily" Value="RobotoMedium" />
+            <Setter Property="FontSize" Value="15" />
         </Style>
         <Style TargetType="Label" Class="UserInfoLabel">
             <Setter Property="TextColor" Value="{StaticResource TextColorGray}" />
             <Setter Property="FontFamily" Value="RobotoRegular" />
-        </Style>
-        <Style TargetType="Label" Class="RobotoBoldLabel">
-            <Setter Property="FontFamily" Value="RobotoBold" />
+            <Setter Property="FontSize" Value="15" />
         </Style>
         <Style TargetType="Label" Class="NumberOfFriendValueLabel">
             <Setter Property="TextColor" Value="{StaticResource TextColorGray}" />
-            <Setter Property="Margin" Value="20,0,0,0" />
+            <Setter Property="FontFamily" Value="RobotoBold" />
+            <Setter Property="FontSize" Value="17" />
+            <Setter Property="Margin" Value="15,0,0,0" />
         </Style>
         <Style TargetType="ffimageloading:CachedImage" Class="ProfileImageStyle">
             <Setter Property="HeightRequest" Value="50" />
@@ -82,26 +91,47 @@
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="Padding" Value="10,0,10,0" />
         </Style>
+        <Style TargetType="StackLayout" Class="SearchStackLayoutStyle">
+            <Setter Property="Margin" Value="0,10,0,10" />
+            <Setter Property="Padding" Value="5,0,5,0" />
+        </Style>
+        <Style TargetType="material:MaterialEntry" Class="MaterialEntryStyle">
+            <Setter Property="Type" Value="Filled" />
+            <Setter Property="Placeholder" Value="Enter the username" />
+            <Setter Property="MaxLength" Value="30" />
+            <Setter Property="HeightRequest" Value="50" />
+            <Setter Property="FieldHeightRequest" Value="50" />
+            <Setter Property="ReturnType" Value="Search" />
+            <Setter Property="CornerRadius" Value="15" />
+            <Setter Property="Keyboard" Value="Text" />
+            <Setter Property="TextColor" Value="{StaticResource EntryTextColor}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource EntryBackgroundColor}" />
+            <Setter Property="PlaceholderColor" Value="{StaticResource EntryPlaceholderColor}" />
+            <Setter Property="BorderColor" Value="{StaticResource EntryBorderColor}" />
+        </Style>
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
             <StackLayout>
                 <Frame StyleClass="HeaderFrameStyle">
-                    <StackLayout Orientation="Horizontal" VerticalOptions="StartAndExpand">
-                        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
-                            <material:MaterialFloatingButton Clicked="MaterialFloatingButton_OnClicked"
-                                                             StyleClass="MaterialFloatingButtonStyle,PreviousPageButtonStyle">
-                                <material:MaterialFloatingButton.CustomIcon>
-                                    <forms:SvgCachedImage
-                                        Source="resource://SocialNetwork.Resources.arrow_back_36dp.svg" />
-                                </material:MaterialFloatingButton.CustomIcon>
-                            </material:MaterialFloatingButton>
-                        </StackLayout>
+                    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="StartAndExpand">
+                        <material:MaterialFloatingButton Clicked="MaterialFloatingButton_OnClicked"
+                                                         StyleClass="MaterialFloatingButtonStyle,PreviousPageButtonStyle">
+                            <material:MaterialFloatingButton.CustomIcon>
+                                <forms:SvgCachedImage
+                                    Source="resource://SocialNetwork.Resources.arrow_back_36dp.svg" />
+                            </material:MaterialFloatingButton.CustomIcon>
+                        </material:MaterialFloatingButton>
                     </StackLayout>
                 </Frame>
             </StackLayout>
             <StackLayout StyleClass="SearchStackLayoutStyle">
-                <!-- TODO: search input -->
+                <material:MaterialEntry StyleClass="MaterialEntryStyle">
+                    <material:MaterialEntry.CustomLeadingIcon>
+                        <forms:SvgCachedImage
+                            Source="resource://SocialNetwork.Resources.search_18dp.svg" />
+                    </material:MaterialEntry.CustomLeadingIcon>
+                </material:MaterialEntry>
             </StackLayout>
             <CollectionView
                 ItemsSource="{Binding Friends}"
@@ -109,9 +139,9 @@
                 <CollectionView.HeaderTemplate>
                     <DataTemplate>
                         <StackLayout StyleClass="FriendsHeaderLayout">
-                            <Label Text="My friends" StyleClass="TextLabel,RobotoBoldLabel" />
+                            <Label Text="My friends" StyleClass="HeaderListTitleLabel" />
                             <Label Text="{Binding NumberOfFriends}"
-                                   StyleClass="NumberOfFriendValueLabel,RobotoBoldLabel" />
+                                   StyleClass="NumberOfFriendValueLabel" />
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.HeaderTemplate>
@@ -134,7 +164,7 @@
                                          VerticalOptions="CenterAndExpand"
                                          HorizontalOptions="Start"
                                          Margin="10,0,0,0">
-                                <Label Text="{Binding Username}" StyleClass="TextLabel,UsernameLabel" />
+                                <Label Text="{Binding Username}" StyleClass="UsernameLabel" />
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding Age, StringFormat='{0} years old,'}"
                                            StyleClass="UserInfoLabel" />
