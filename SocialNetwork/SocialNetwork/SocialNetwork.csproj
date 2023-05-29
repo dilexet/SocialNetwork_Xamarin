@@ -78,6 +78,12 @@
     <EmbeddedResource Include="Resources\arrow_back_36dp.svg" />
     <None Remove="Resources\search_18dp.svg" />
     <EmbeddedResource Include="Resources\search_18dp.svg" />
+    <None Remove="Resources\location_24dp.svg" />
+    <EmbeddedResource Include="Resources\location_24dp.svg" />
+    <None Remove="Resources\place_24dp.svg" />
+    <EmbeddedResource Include="Resources\place_24dp.svg" />
+    <None Remove="Resources\add_circle_outline_24dp.svg" />
+    <EmbeddedResource Include="Resources\add_circle_outline_24dp.svg" />
   </ItemGroup>
 
   <ItemGroup>

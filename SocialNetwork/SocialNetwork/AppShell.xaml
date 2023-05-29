@@ -15,6 +15,9 @@
     </Shell.Resources>
 
     <TabBar Style="{StaticResource TabBarStyle}">
+        <Tab Title="Profile" Icon="user.png">
+            <ShellContent ContentTemplate="{DataTemplate tabBar:ProfilePage}" />
+        </Tab>
         <Tab Title="Friends" Icon="friends.png">
             <ShellContent ContentTemplate="{DataTemplate tabBar:FriendsPage}" />
         </Tab>
@@ -23,9 +26,6 @@
         </Tab>
         <Tab Title="Home" Icon="home.png">
             <ShellContent ContentTemplate="{DataTemplate tabBar:NewsPage}" />
-        </Tab>
-        <Tab Title="Profile" Icon="user.png">
-            <ShellContent ContentTemplate="{DataTemplate tabBar:ProfilePage}" />
         </Tab>
     </TabBar>
 </Shell>
