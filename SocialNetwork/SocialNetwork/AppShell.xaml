@@ -8,15 +8,15 @@
         <ResourceDictionary>
             <Style x:Key="TabBarStyle" TargetType="TabBar">
                 <Setter Property="Shell.TabBarBackgroundColor" Value="#30A9DE" />
-                <Setter Property="Shell.TabBarTitleColor" Value="#DCDCDC" />
-                <Setter Property="Shell.TabBarUnselectedColor" Value="#1E1E1E" />
+                <Setter Property="Shell.TabBarTitleColor" Value="#FFFFFF" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#A2DED0" />
             </Style>
         </ResourceDictionary>
     </Shell.Resources>
 
     <TabBar Style="{StaticResource TabBarStyle}">
-        <Tab Title="Profile" Icon="user.png">
-            <ShellContent ContentTemplate="{DataTemplate tabBar:ProfilePage}" />
+        <Tab Title="Home" Icon="home.png">
+            <ShellContent ContentTemplate="{DataTemplate tabBar:NewsPage}" />
         </Tab>
         <Tab Title="Friends" Icon="friends.png">
             <ShellContent ContentTemplate="{DataTemplate tabBar:FriendsPage}" />
@@ -24,8 +24,8 @@
         <Tab Title="Messenger" Icon="chat_bubble.png">
             <ShellContent ContentTemplate="{DataTemplate tabBar:MessengerPage}" />
         </Tab>
-        <Tab Title="Home" Icon="home.png">
-            <ShellContent ContentTemplate="{DataTemplate tabBar:NewsPage}" />
+        <Tab Title="Profile" Icon="user.png">
+            <ShellContent ContentTemplate="{DataTemplate tabBar:ProfilePage}" />
         </Tab>
     </TabBar>
 </Shell>

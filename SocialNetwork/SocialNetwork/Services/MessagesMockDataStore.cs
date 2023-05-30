@@ -37,7 +37,7 @@ namespace SocialNetwork.Services
                     Id = Guid.NewGuid(),
                     SenderId = friendId,
                     Text = "I'm running a bit late, be there in 10 minutes.",
-                    DateMessageSent = dateNow.AddHours(-2)
+                    DateMessageSent = dateNow.AddYears(-1)
                 },
                 new Message
                 {
@@ -51,7 +51,7 @@ namespace SocialNetwork.Services
                     Id = Guid.NewGuid(),
                     SenderId = MyId,
                     Text = "I'm sorry for the confusion earlier.",
-                    DateMessageSent = dateNow.AddHours(-1)
+                    DateMessageSent = dateNow.AddYears(-2)
                 },
                 new Message
                 {
@@ -86,7 +86,7 @@ namespace SocialNetwork.Services
                     Id = Guid.NewGuid(),
                     SenderId = friendId,
                     Text = "I'm not feeling well today, so I won't be able to come in.",
-                    DateMessageSent = dateNow.AddDays(-3)
+                    DateMessageSent = dateNow.AddDays(-1)
                 },
                 new Message
                 {
@@ -141,7 +141,7 @@ namespace SocialNetwork.Services
 
             return groups.Select(x =>
                 new MessageGroup<string, MessageDto>(
-                    x.Date.ToString("MMMM dd"),
+                    ConvertGroupDateToString(x.Date),
                     x.Select(item => new MessageDto()
                     {
                         Id = item.Id,
@@ -151,6 +151,31 @@ namespace SocialNetwork.Services
                     })
                 )
             );
+        }
+
+        public string ConvertGroupDateToString(DateTime groupDate)
+        {
+            var dateToday = DateTime.Today.Date;
+            var dateGroupWithoutTime = groupDate.Date;
+
+            if (dateToday == dateGroupWithoutTime)
+            {
+                return "today";
+            }
+
+            var dateYesterday = dateToday.Subtract(new TimeSpan(1, 0, 0, 0));
+
+            if (dateYesterday == dateGroupWithoutTime)
+            {
+                return "yesterday";
+            }
+
+            if (dateToday.Year == dateGroupWithoutTime.Year)
+            {
+                return groupDate.ToString("MMMM dd");
+            }
+
+            return groupDate.ToString("MMMM dd, yyyy");
         }
     }
 }

@@ -98,16 +98,36 @@ namespace SocialNetwork.Services
 
         public async Task<IEnumerable<NewsDto>> GetNews()
         {
-            return await Task.FromResult(_news.ToList().OrderBy(x => x.DateCreated).Select(x => new NewsDto()
+            return await Task.FromResult(_news.ToList().OrderByDescending(x => x.DateCreated).Select(x => new NewsDto()
             {
                 Id = x.Id,
                 Username = x.Username,
                 ProfileImageUri = x.ProfileImageUri,
-                DateCreated = x.DateCreated.ToString("d MMMM \"at\" HH:mm"),
+                DateCreated = ConvertDateToString(x.DateCreated),
                 Text = x.Text,
                 ImageUri = x.ImageUri,
                 IdUsersLiked = x.IdUsersLiked,
             }));
+        }
+
+        private string ConvertDateToString(DateTime convertingDate)
+        {
+            var dateNow = DateTime.Today.Date;
+            var dateConverting = convertingDate.Date;
+
+            if (dateNow == dateConverting)
+            {
+                return $"today at {convertingDate:HH:mm}";
+            }
+
+            var dateYesterday = dateNow.Subtract(new TimeSpan(1, 0, 0, 0));
+           
+            if (dateYesterday == dateConverting)
+            {
+                return $"yesterday at {convertingDate:HH:mm}";
+            }
+
+            return convertingDate.ToString("d MMMM \"at\" HH:mm");
         }
     }
 }
