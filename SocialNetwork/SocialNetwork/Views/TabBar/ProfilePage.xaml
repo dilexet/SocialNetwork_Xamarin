@@ -13,10 +13,10 @@
              x:Class="SocialNetwork.Views.TabBar.ProfilePage">
     <ContentPage.Resources>
         <Style TargetType="ffimageloading:CachedImage" Class="ProfileImageStyle">
-            <Setter Property="HeightRequest" Value="90" />
-            <Setter Property="WidthRequest" Value="90" />
-            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            <Setter Property="HeightRequest" Value="100" />
+            <Setter Property="WidthRequest" Value="100" />
             <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+            <Setter Property="VerticalOptions" Value="CenterAndExpand" />
             <Setter Property="Aspect" Value="AspectFit" />
             <Setter Property="DownsampleToViewSize" Value="True" />
         </Style>
@@ -33,71 +33,84 @@
         <StackLayout>
 
             <StackLayout BindingContext="{Binding Profile}">
-                <StackLayout
-                    x:DataType="models:Profile"
-                    HeightRequest="120"
-                    Padding="0" Margin="0">
+                <Grid x:DataType="models:Profile">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <StackLayout Grid.Row="0"
+                                 HeightRequest="50"
+                                 Margin="0"
+                                 Padding="0"
+                                 VerticalOptions="Start"
+                                 HorizontalOptions="Start">
+                    </StackLayout>
+
+                    <StackLayout Grid.Row="1">
+                        <Frame
+                            CornerRadius="18"
+                            BackgroundColor="#FFFFFF"
+                            HasShadow="False"
+                            Padding="0" Margin="0">
+                            <StackLayout VerticalOptions="StartAndExpand"
+                                         Margin="0,60,0,40"
+                                         HorizontalOptions="CenterAndExpand">
+                                <Label TextColor="#000000"
+                                       FontFamily="RobotoBold"
+                                       FontAttributes="Bold"
+                                       FontSize="24"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"
+                                       Text="{Binding Username}" />
+                                <StackLayout Orientation="Horizontal"
+                                             Margin="0,10,0,0"
+                                             VerticalOptions="StartAndExpand"
+                                             HorizontalOptions="CenterAndExpand">
+                                    <ffimageSvg:SvgCachedImage WidthRequest="26"
+                                                               HeightRequest="26"
+                                                               Source="resource://SocialNetwork.Resources.place_24dp.svg" />
+                                    <Label TextColor="#828C96"
+                                           FontFamily="RobotoLight"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center"
+                                           FontSize="18" FontAttributes="Bold"
+                                           Text="{Binding CityFrom}" />
+                                </StackLayout>
+                                <StackLayout Margin="0,20,0,0">
+                                    <material3:MaterialButton
+                                        HeightRequest="50"
+                                        WidthRequest="320"
+                                        ButtonType="Outlined"
+                                        BackgroundColor="#EFF0F2"
+                                        BorderColor="#F9FAFC"
+                                        CornerRadius="20"
+                                        Animation="Fade"
+                                        AnimationParameter="0.6"
+                                        Text="Post"
+                                        TextColor="#2A85E3"
+                                        FontFamily="RobotoRegular"
+                                        FontSize="22">
+                                        <material3:MaterialButton.LeadingIcon>
+                                            <ffimageSvg:SvgCachedImage WidthRequest="40"
+                                                                       HeightRequest="40"
+                                                                       Source="resource://SocialNetwork.Resources.add_circle_outline_24dp.svg" />
+                                        </material3:MaterialButton.LeadingIcon>
+                                    </material3:MaterialButton>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </StackLayout>
+
                     <ffimageloading:CachedImage
+                        Grid.Row="0"
+                        Grid.RowSpan="2"
                         StyleClass="ProfileImageStyle"
                         Source="{Binding ProfileImageUri}">
                         <ffimageloading:CachedImage.Transformations>
-                            <fftransformations:CircleTransformation />
+                            <fftransformations:CircleTransformation BorderHexColor="#FFFFFF" BorderSize="30" />
                         </ffimageloading:CachedImage.Transformations>
                     </ffimageloading:CachedImage>
-                </StackLayout>
-                <Frame
-                    x:DataType="models:Profile"
-                    CornerRadius="18"
-                    BackgroundColor="#FFFFFF"
-                    HasShadow="False"
-                    Padding="0" Margin="0">
-                    <StackLayout VerticalOptions="StartAndExpand"
-                                 Margin="0,40,0,40"
-                                 HorizontalOptions="CenterAndExpand">
-                        <Label TextColor="#000000"
-                               FontFamily="RobotoBold"
-                               FontAttributes="Bold"
-                               FontSize="24"
-                               HorizontalTextAlignment="Center"
-                               VerticalTextAlignment="Center"
-                               Text="{Binding Username}" />
-                        <StackLayout Orientation="Horizontal"
-                                     Margin="0,10,0,0"
-                                     VerticalOptions="StartAndExpand"
-                                     HorizontalOptions="CenterAndExpand">
-                            <ffimageSvg:SvgCachedImage WidthRequest="26"
-                                                       HeightRequest="26"
-                                                       Source="resource://SocialNetwork.Resources.place_24dp.svg" />
-                            <Label TextColor="#828C96"
-                                   FontFamily="RobotoLight"
-                                   HorizontalTextAlignment="Center"
-                                   VerticalTextAlignment="Center"
-                                   FontSize="18" FontAttributes="Bold"
-                                   Text="{Binding CityFrom}" />
-                        </StackLayout>
-                        <StackLayout Margin="0,20,0,0">
-                            <material3:MaterialButton
-                                HeightRequest="50"
-                                WidthRequest="320"
-                                ButtonType="Outlined"
-                                BackgroundColor="#EFF0F2"
-                                BorderColor="#F9FAFC"
-                                CornerRadius="20"
-                                Animation="Fade"
-                                AnimationParameter="0.6"
-                                Text="Post"
-                                TextColor="#2A85E3"
-                                FontFamily="RobotoRegular"
-                                FontSize="22">
-                                <material3:MaterialButton.LeadingIcon>
-                                    <ffimageSvg:SvgCachedImage WidthRequest="40"
-                                                               HeightRequest="40"
-                                                               Source="resource://SocialNetwork.Resources.add_circle_outline_24dp.svg" />
-                                </material3:MaterialButton.LeadingIcon>
-                            </material3:MaterialButton>
-                        </StackLayout>
-                    </StackLayout>
-                </Frame>
+                </Grid>
             </StackLayout>
             <StackLayout>
                 <Frame
